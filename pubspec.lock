@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "2.5.0-nullsafety.1"
   async_executor:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: async_executor
       url: "https://pub.dartlang.org"
@@ -810,8 +810,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "906e8d5dadb2c1f56a5b18a4639573be88f20945"
-      resolved-ref: "906e8d5dadb2c1f56a5b18a4639573be88f20945"
+      ref: "97146a1000f426569f406d0ceb33a198a202d2e6"
+      resolved-ref: "97146a1000f426569f406d0ceb33a198a202d2e6"
       url: "https://github.com/trufi-association/user_route_tracking"
     source: git
     version: "0.0.1"

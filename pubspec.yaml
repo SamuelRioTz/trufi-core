@@ -39,7 +39,8 @@ dependencies:
   user_route_tracking:
     git:
       url: https://github.com/trufi-association/user_route_tracking
-      ref: 906e8d5dadb2c1f56a5b18a4639573be88f20945
+      ref: 97146a1000f426569f406d0ceb33a198a202d2e6  
+  async_executor: ^0.0.1
 
 dev_dependencies:
   flutter_driver:
