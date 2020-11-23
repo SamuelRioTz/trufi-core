@@ -55,61 +55,75 @@ class PlanEmptyPageState extends State<PlanEmptyPage>
         child: _buildLowerActionButtons(context),
       ),
       Positioned(
-        bottom: 16.0,
+        bottom: 30,
         right: 0,
         left: 0,
         child: Center(
-          child: RaisedButton(
-            onPressed: () {
-              AsyncExecutor(
-                loadingMessage: showLoadingMessage,
-                errorMessage: showErrorMessage,
-              ).run<bool>(
-                  context: context,
-                  onExecute: () async {
-                    bool baseinit =
-                        TrackingManager().currentTrack.value == null;
-                    await TrackingManager().startTracking();
-                    return baseinit;
-                  },
-                  onFinish: (value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => UserRouteTracking(
-                          trackingOnInit: value,
-                          userTrackingUri: Uri(
-                            host:
-                                "us-central1-usertracking-d3b97.cloudfunctions.net",
-                            scheme: "https",
-                            path: "/routeNew",
-                          ),
-                          mapLayer: tileHostingTileLayerOptions(
-                            getTilesEndpointForMapType(null),
+          child: GestureDetector(
+              onTap: () {
+                AsyncExecutor(
+                  loadingMessage: showLoadingMessage,
+                  errorMessage: showErrorMessage,
+                ).run<bool>(
+                    context: context,
+                    onExecute: () async {
+                      bool baseinit =
+                          TrackingManager().currentTrack.value == null;
+                      await TrackingManager().startTracking();
+                      return baseinit;
+                    },
+                    onFinish: (value) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserRouteTracking(
+                            trackingOnInit: value,
+                            userTrackingUri: Uri(
+                              host:
+                                  "us-central1-usertracking-d3b97.cloudfunctions.net",
+                              scheme: "https",
+                              path: "/routeNew",
+                            ),
+                            mapLayer: tileHostingTileLayerOptions(
+                              getTilesEndpointForMapType(null),
+                              tileProviderKey: cfg.map.mapTilerKey,
+                            ),
+                            buildFromMarker: buildYourLocationMarker,
+                            buildYourLocationMarker: buildFromMarker,
+                            mapTilerCopyright: cfg.url.mapTilerCopyright,
+                            center: cfg.map.center,
+                            maxZoom: cfg.map.onlineMaxZoom,
+                            minZoom: cfg.map.onlineMinZoom,
+                            openStreetMapCopyright:
+                                cfg.url.openStreetMapCopyright,
                             tileProviderKey: cfg.map.mapTilerKey,
                           ),
-                          buildFromMarker: buildYourLocationMarker,
-                          buildYourLocationMarker: buildFromMarker,
-                          mapTilerCopyright: cfg.url.mapTilerCopyright,
-                          center: cfg.map.center,
-                          maxZoom: cfg.map.onlineMaxZoom,
-                          minZoom: cfg.map.onlineMinZoom,
-                          openStreetMapCopyright:
-                              cfg.url.openStreetMapCopyright,
-                          tileProviderKey: cfg.map.mapTilerKey,
                         ),
-                      ),
-                    );
-                  });
-            },
-            child: StreamBuilder<TrackedRoute>(
-                stream: TrackingManager().currentTrack,
-                builder: (context, snapshot) {
-                  return Text(snapshot.data != null
-                      ? "Continue Tracking"
-                      : "Start Tracking");
-                }),
-          ),
+                      );
+                    });
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Color(0xFFd81b60),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: StreamBuilder<TrackedRoute>(
+                      stream: TrackingManager().currentTrack,
+                      builder: (context, snapshot) {
+                        return Text(
+                          snapshot.data != null
+                              ? "Continue Tracking"
+                              : "Start Tracking",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        );
+                      }),
+                ),
+              )),
         ),
       ),
     ]);

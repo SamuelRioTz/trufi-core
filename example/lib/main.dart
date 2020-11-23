@@ -4,6 +4,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:latlong/latlong.dart';
 import 'package:trufi_core/trufi_app.dart';
 import 'package:trufi_core/trufi_configuration.dart';
+import 'package:user_route_tracking/tracking_route/widgets/tracking_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +13,7 @@ void main() async {
   final globalCfg = GlobalConfiguration();
   await globalCfg.loadFromAsset("app_config");
 
+  await TrackingManager().load();
   // Abbreviations
   trufiCfg.abbreviations.addAll({
     "Avenida": "Av.",
