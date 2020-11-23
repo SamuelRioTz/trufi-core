@@ -59,5 +59,9 @@
             android:permission="android.permission.FOREGROUND_SERVICE"
             android:exported="true"
             />
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
     </application>
 </manifest>
