@@ -2,6 +2,7 @@ import 'package:async_executor/async_executor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:trufi_core/trufi_map_utils.dart';
 import 'package:user_route_tracking/tracking_route/models/tracked_route.dart';
 import 'package:user_route_tracking/tracking_route/utils/messages/error_message.dart';
 import 'package:user_route_tracking/tracking_route/utils/messages/loading_message.dart';
@@ -55,43 +56,60 @@ class PlanEmptyPageState extends State<PlanEmptyPage>
       ),
       Positioned(
         bottom: 16.0,
-        right: 16.0,
-        child: RaisedButton(
-          onPressed: () {
-            AsyncExecutor(
-              loadingMessage: showLoadingMessage,
-              errorMessage: showErrorMessage,
-            ).run<bool>(
-                context: context,
-                onExecute: () async {
-                  bool baseinit = TrackingManager().currentTrack.value == null;
-                  await TrackingManager().startTracking();
-                  return baseinit;
-                },
-                onFinish: (value) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserRouteTracking(
-                        trackingOnInit: value,
-                        userTrackingUri: Uri(
-                          host:
-                              "us-central1-usertracking-d3b97.cloudfunctions.net",
-                          scheme: "https",
-                          path: "/routeNew",
+        right: 0,
+        left: 0,
+        child: Center(
+          child: RaisedButton(
+            onPressed: () {
+              AsyncExecutor(
+                loadingMessage: showLoadingMessage,
+                errorMessage: showErrorMessage,
+              ).run<bool>(
+                  context: context,
+                  onExecute: () async {
+                    bool baseinit =
+                        TrackingManager().currentTrack.value == null;
+                    await TrackingManager().startTracking();
+                    return baseinit;
+                  },
+                  onFinish: (value) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserRouteTracking(
+                          trackingOnInit: value,
+                          userTrackingUri: Uri(
+                            host:
+                                "us-central1-usertracking-d3b97.cloudfunctions.net",
+                            scheme: "https",
+                            path: "/routeNew",
+                          ),
+                          mapLayer: tileHostingTileLayerOptions(
+                            getTilesEndpointForMapType(null),
+                            tileProviderKey: cfg.map.mapTilerKey,
+                          ),
+                          buildFromMarker: buildYourLocationMarker,
+                          buildYourLocationMarker: buildFromMarker,
+                          mapTilerCopyright: cfg.url.mapTilerCopyright,
+                          center: cfg.map.center,
+                          maxZoom: cfg.map.onlineMaxZoom,
+                          minZoom: cfg.map.onlineMinZoom,
+                          openStreetMapCopyright:
+                              cfg.url.openStreetMapCopyright,
+                          tileProviderKey: cfg.map.mapTilerKey,
                         ),
                       ),
-                    ),
-                  );
-                });
-          },
-          child: StreamBuilder<TrackedRoute>(
-              stream: TrackingManager().currentTrack,
-              builder: (context, snapshot) {
-                return Text(snapshot.data != null
-                    ? "Continue Tracking"
-                    : "Start Tracking");
-              }),
+                    );
+                  });
+            },
+            child: StreamBuilder<TrackedRoute>(
+                stream: TrackingManager().currentTrack,
+                builder: (context, snapshot) {
+                  return Text(snapshot.data != null
+                      ? "Continue Tracking"
+                      : "Start Tracking");
+                }),
+          ),
         ),
       ),
     ]);
