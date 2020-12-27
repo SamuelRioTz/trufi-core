@@ -238,10 +238,40 @@ class TrufiLocalizationDefault implements TrufiLocalization {
         desc: "Message when an unknown error has occured",
       );
 
+  String commonDiscard() => Intl.message(
+        "Discard",
+        name: "commonDiscard",
+        desc: "Edit field label",
+      );
+
   String commonError() => Intl.message(
         "Error",
         name: "commonError",
         desc: "Message when an error has occured",
+      );
+
+  String commonEdit() => Intl.message(
+        "Edit",
+        name: "commonEdit",
+        desc: "Edit field label",
+      );
+
+  String commonPoints() => Intl.message(
+        "Points",
+        name: "commonPoints",
+        desc: "Submit field label",
+      );
+      
+  String commonRoutes() => Intl.message(
+        "Routes",
+        name: "commonRoutes",
+        desc: "Submit field label",
+      );
+
+  String commonSubmit() => Intl.message(
+        "Submit",
+        name: "commonSubmit",
+        desc: "Submit field label",
       );
 
   String noRouteError() =>
@@ -739,6 +769,60 @@ class TrufiLocalizationDefault implements TrufiLocalization {
         },
       );
 
+  String trackerContinue()=> Intl.message(
+        "Continue Tracking",
+        name: "trackerContinue",
+        desc: "Continue the device tracker",
+      );
+
+  String trackerEditRouteName()=> Intl.message(
+        "Edit Route Name",
+        name: "trackerEditRouteName",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerEnterRouteName()=> Intl.message(
+        "Enter Route Name",
+        name: "trackerEnterRouteName",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerInsertRouteName()=> Intl.message(
+        "you must enter the route name",
+        name: "trackerInsertRouteName",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerRouteDriving()=> Intl.message(
+        "You are tracking Route",
+        name: "trackerRouteDriving",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerRouteDrivingQuestion()=> Intl.message(
+        "What Route are you driving?",
+        name: "trackerRouteDrivingQuestion",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerUploadRoutes()=> Intl.message(
+        "Upload Routes",
+        name: "trackerUploadRoutes",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerStart()=> Intl.message(
+        "Start Tracking",
+        name: "trackerStart",
+        desc: "Starting the device tracker",
+      );
+
+  String trackerStop()=> Intl.message(
+        "Stop Tracking",
+        name: "trackerStop",
+        desc: "Starting the device tracker",
+      );
+
   String donate() => Intl.message(
         "Donate",
         name: "donate",
@@ -853,7 +937,17 @@ abstract class TrufiLocalization {
 
   String commonUnknownError();
 
+  String commonDiscard();
+
   String commonError();
+
+  String commonEdit();
+
+  String commonPoints();
+      
+  String commonRoutes();
+
+  String commonSubmit();
 
   String noRouteError();
 
@@ -1001,6 +1095,24 @@ abstract class TrufiLocalization {
   String teamSectionTranslations(String translators);
 
   String teamSectionRoutes(String routeContributors, String osmContributors);
+  
+  String trackerContinue();
+
+  String trackerEditRouteName();
+
+  String trackerEnterRouteName();
+
+  String trackerInsertRouteName();
+
+  String trackerRouteDriving();
+
+  String trackerRouteDrivingQuestion();
+
+  String trackerUploadRoutes();
+
+  String trackerStart();
+
+  String trackerStop();
 
   String donate();
 
