@@ -2,6 +2,7 @@ import 'package:async_executor/async_executor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:trufi_core/trufi_localizations.dart';
 import 'package:trufi_core/trufi_map_utils.dart';
 import 'package:user_route_tracking/tracking_route/models/tracked_route.dart';
 import 'package:user_route_tracking/tracking_route/utils/messages/error_message.dart';
@@ -31,6 +32,7 @@ class PlanEmptyPageState extends State<PlanEmptyPage>
 
   @override
   Widget build(BuildContext context) {
+    final localization = TrufiLocalizations.of(context).localization;
     final cfg = TrufiConfiguration();
     return Stack(children: <Widget>[
       TrufiOnlineMap(
@@ -115,8 +117,8 @@ class PlanEmptyPageState extends State<PlanEmptyPage>
                       builder: (context, snapshot) {
                         return Text(
                           snapshot.data != null
-                              ? "Continue Tracking"
-                              : "Start Tracking",
+                              ? localization.trackerContinue()
+                              : localization.trackerStart(),
                           style: TextStyle(
                             color: Colors.white,
                           ),
